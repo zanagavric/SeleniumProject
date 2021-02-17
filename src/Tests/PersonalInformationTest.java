@@ -1,6 +1,5 @@
 package Tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,8 +22,8 @@ public class PersonalInformationTest extends TestBase{
 		myPersonalInformationPage.insertData(myPersonalInformationPage.geteMailAddressField(), excelreader.getData("PersonalInformation", 5, 3));
 		myPersonalInformationPage.insertData(myPersonalInformationPage.getCurrentPasswordField(), excelreader.getData("PersonalInformation", 6, 3));
 		myPersonalInformationPage.saveButtonClick();
-		
-		Assert.assertEquals(driver.findElement(By.xpath("//p[@class='alert alert-success']")).getText(),excelreader.getData("PersonalInformation", 7, 4));
+
+		Assert.assertEquals(myPersonalInformationPage.getTextassert().getText(),excelreader.getData("PersonalInformation", 7, 4));
 		
 	}
 	@AfterMethod

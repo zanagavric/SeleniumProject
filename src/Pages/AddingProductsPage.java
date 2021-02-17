@@ -1,7 +1,6 @@
 package Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,21 +18,17 @@ public class AddingProductsPage extends TestBase {
 	WebElement proceedToCheckout;
 	WebElement continueShopping;
 	WebElement quantityAdd;
-	WebElement quantity;
-	WebElement product;
-	WebElement idAssert1;
-	WebElement idAssert2;
-	WebElement idAssert3;
 	WebElement textAssert;
 	WebElement textAssert2;
 	WebElement delete;
+	WebElement product1;
+	WebElement product2;
+	WebElement product3;
 	WebDriverWait wait;
-	public JavascriptExecutor js;
 	Actions actions;
 
 	public AddingProductsPage(WebDriver driver) {
 		this.driver = driver;
-		this.js = (JavascriptExecutor) driver;
 		this.actions = new Actions(driver);
 		this.wait = new WebDriverWait(driver, 5);
 	}
@@ -59,7 +54,7 @@ public class AddingProductsPage extends TestBase {
 	}
 
 	public WebElement getAddToCart3() {
-		return driver.findElement(By.xpath("//a[@data-id-product='4']"));
+		return driver.findElement(By.xpath("//a[@data-id-product='1']"));
 	}
 
 	public WebElement getProduct1() {
@@ -68,27 +63,15 @@ public class AddingProductsPage extends TestBase {
 	}
 
 	public WebElement getProduct2() {
-		return driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[3]/div"));
+		return driver.findElement(By.xpath("//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']"));
 	}
 
 	public WebElement getProduct3() {
-		return driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[4]/div"));
+		return driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']"));
 	}
 
-	public WebElement getIdAssert1() {
-		return driver.findElement(By.id("product_2_7_0_0"));
-	}
-	
-	public WebElement getIdAssert2() {
-		return driver.findElement(By.id("product_3_13_0_0"));
-	}
-
-	public WebElement getIdAssert3() {
-		return driver.findElement(By.id("product_4_16_0_0"));
-	}
-	
 	public WebElement getTextAssert() {
-		return driver.findElement(By.xpath("p[@class='alert alert-warning']"));
+		return driver.findElement(By.xpath("//a[@title='View my shopping cart']"));
 	}
 	
 	public WebElement getTextAssert2() {
@@ -103,14 +86,19 @@ public class AddingProductsPage extends TestBase {
 		element.click();
 	}
 
+	public String testForAssert() {
+		return getTextAssert().getText();
+	}
 	public void deleteClick() {
 		getDelete().click();
 	}
 	public void continueShoppingClick() {
-		getContinueShopping().click();
+		wait.until(ExpectedConditions.visibilityOf(getContinueShopping()));
+		this.getContinueShopping().click();
 	}
 	
 	public void proceedToCheckoutClick() {
+		wait.until(ExpectedConditions.visibilityOf(getProceedToCheckout()));
 		this.getProceedToCheckout().click();
 	}
 
@@ -119,7 +107,7 @@ public class AddingProductsPage extends TestBase {
 	}
 
 	public void addProduct(WebElement element1, WebElement element2) {
-		js.executeScript("window.scrollBy(0,900)");
+		wait.until(ExpectedConditions.visibilityOf(element1));
 		actions.moveToElement(element1).perform();
 		actions.moveToElement(element2);
 		actions.click().build().perform();

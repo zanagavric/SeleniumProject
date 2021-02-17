@@ -23,10 +23,8 @@ public class WishListTest extends TestBase {
 	}	
 	@Test (priority = 1)
 	public void removeWishList() throws InterruptedException {
-		wishListPage.deleteIconClick();
+		wishListPage.remove();
 		Thread.sleep(2000);
-		wishListPage.alertClickOK();
-		Thread.sleep(2000);		
 		Assert.assertFalse(wishListPage.isElementPresent());			
 	}	
 	@Test (priority = 2)
@@ -41,15 +39,14 @@ public class WishListTest extends TestBase {
 	@Test (priority = 3)
 	public void removeAllWishList() throws InterruptedException {
 		for( int i = counter; i>0; i-- ){
-		removeWishList();
+		wishListPage.remove();
 		Thread.sleep(2000);
 		}
 		Assert.assertFalse(wishListPage.isElementPresent());
 	}	
 	@AfterMethod
-	public void theEndTest() throws InterruptedException {
+	public void theEndTest() {
 		driver.manage().deleteAllCookies();
 		driver.navigate().refresh();
-		Thread.sleep(2000);
 	}
 }

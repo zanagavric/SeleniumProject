@@ -22,6 +22,7 @@ public class AddressesPage extends TestBase{
 	WebElement saveButton;
 	WebElement stateField;
 	WebElement addressForCompare;
+	WebElement street2;
 	Alert alert;
 	
 	public AddressesPage(WebDriver driver) {
@@ -35,9 +36,13 @@ public class AddressesPage extends TestBase{
 	public WebElement getUpdateButton() {
 		return driver.findElement(By.xpath("//a[@title='Update']"));
 	}
+	
+	public WebElement getStreet2() {
+		return driver.findElement(By.xpath("//h3[text()='STREET 2']"));
+	}
 
 	public WebElement getDeleteButton() {
-		return driver.findElement(By.xpath("//a[@href='http://automationpractice.com/index.php?controller=address&id_address=447707&delete=']"));
+		return driver.findElement(By.xpath("//*[@id=\"center_column\"]/div[1]/div/div[2]/ul/li[9]/a[2]"));
 	}
 
 	public WebElement getAddAnewAddressButton() {
@@ -100,15 +105,25 @@ public class AddressesPage extends TestBase{
 		selectElement.selectByVisibleText(value);
 	}
 		
-	public void changeAddress(String value1,String value2 ) {
-		if(this.getAddressField().getText().equals(value1)) {
+	public String changeAddress(String value1,String value2 ) {
+		if((this.getAddressField().getAttribute("value")).equals(value2)) {
 			this.getAddressField().clear();
-			this.getAddressField().sendKeys(value2);
+			this.getAddressField().sendKeys(value1);
+			return value1;
 		}else {
 			this.getAddressField().clear();
-		    this.getAddressField().sendKeys(value1);
+		    this.getAddressField().sendKeys(value2);
+		    return value2;
+		}
+	}
+	
+	public boolean isElementPresent() {
+		try {
+			getStreet2();
+			return true;
+		} catch(org.openqa.selenium.NoSuchElementException e) {
+			return false;
 		}
 	}
 
-	
 }

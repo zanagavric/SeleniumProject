@@ -11,6 +11,7 @@ public class MainPage extends TestBase{
 	WebDriver driver;
 	WebElement signINavBar;
 	WebElement homePage;
+	WebElement myAccountPage;
 	
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
@@ -20,6 +21,11 @@ public class MainPage extends TestBase{
 		return driver.findElement(By.xpath("//a[@class='login']"));
 	}
 	
+	
+	public WebElement getMyAccountPage() {
+		return driver.findElement(By.xpath("//a[@href='http://automationpractice.com/index.php?controller=my-account']"));
+	}
+
 	public WebElement getHomePage() {
 		return driver.findElement(By.xpath("//a[@title='My Store']"));
 	}
@@ -30,4 +36,9 @@ public class MainPage extends TestBase{
 	public void navigateToLoginPage() {
 		this.getSignINavBar().click();
 	}
+	
+	public void navigateMyAccountPage() {
+		this.getMyAccountPage().click();
+	}
+	
 }

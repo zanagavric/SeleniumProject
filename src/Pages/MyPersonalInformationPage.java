@@ -14,7 +14,8 @@ public class MyPersonalInformationPage extends TestBase {
 	WebElement eMailAddressField;
 	WebElement currentPasswordField;
 	WebElement saveButton;
-	
+	WebElement textassert;
+
 	public MyPersonalInformationPage(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -38,33 +39,13 @@ public class MyPersonalInformationPage extends TestBase {
 	public WebElement getSaveButton() {
 		return driver.findElement(By.name("submitIdentity"));
 	}
-	
-	public void InsertFirstName(String firstname) {
-		this.getFirstNameField().clear();
-		this.getFirstNameField().sendKeys(firstname);
-	}
-	
-	public void InsertLastName(String lastname) {
-		this.getLastNameField().clear();
-		this.getLastNameField().sendKeys(lastname);
-	}
-	
-	public void InsertEmailAddressField(String email) {
-		this.geteMailAddressField().clear();
-		this.geteMailAddressField().sendKeys(email);
-	}
-	
-	public void currentPasswordField(String password) {
-		this.getCurrentPasswordField().clear();
-		this.getCurrentPasswordField().sendKeys(password);
+
+	public WebElement getTextassert() {
+		return driver.findElement(By.className("box"));
 	}
 	
 	public void saveButtonClick() {
 		this.getSaveButton().click(); 
 	}
-	
-	public void insertData(WebElement element, String value) {
-		element.clear();
-		element.sendKeys(value);
-	}
+
 }

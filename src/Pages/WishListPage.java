@@ -15,6 +15,7 @@ public class WishListPage extends TestBase {
 	WebElement saveButton;
 	WebElement tableElement;
 	WebElement deleteIcon;
+	WebElement table;
 	Alert alert;
 
 	public WishListPage(WebDriver driver) {
@@ -24,7 +25,11 @@ public class WishListPage extends TestBase {
 	public WebElement getNameNewWishList() {
 		return driver.findElement(By.id("name"));
 	}
-	
+		
+	public WebElement getTable() {
+		return driver.findElement(By.id("block-history"));
+	}
+
 	public WebElement getSaveButton() {
 		return driver.findElement(By.id("submitWishlist"));
 	}
@@ -38,7 +43,7 @@ public class WishListPage extends TestBase {
 	}
 	
 	public WebElement getDeleteIcon() {
-		return driver.findElement(By.xpath("//a[@class='icon']"));
+		return driver.findElement(By.className("icon"));
 	}
 	
 	public void deleteIconClick() {
@@ -52,10 +57,17 @@ public class WishListPage extends TestBase {
 	public void alertClickOK() {
 		this.getAlert().accept();
 	}
+	public void remove() throws InterruptedException {
+		Thread.sleep(1000);
+		deleteIconClick();
+		Thread.sleep(1000);
+		alertClickOK();
+		Thread.sleep(2000);	
+	}
 	
 	public boolean isElementPresent() {
 		try {
-			getTableElement();
+			getTable();
 			return true;
 		} catch(org.openqa.selenium.NoSuchElementException e) {
 			return false;

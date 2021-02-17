@@ -27,25 +27,27 @@ public class MyAddressesTest extends TestBase {
 		Assert.assertEquals(addressesPage.getAddAnewAddressButton().isDisplayed(),true);
 	}
 	@Test (priority = 2)
-	public void updataAddress() {
+	public void updataAddress() throws InterruptedException {
+		String temp = addressesPage.getAddressForCompare().getText();
 		addressesPage.updateButtonClick();
-		addressesPage.changeAddress(excelreader.getData("RegistrationData", 3, 2),excelreader.getData("MyAddress", 4, 5));	
-		String temp = addressesPage.getAddressField().getText();
+		String value1 = excelreader.getData("RegistrationData", 3, 2);
+		String value2 = excelreader.getData("MyAddress", 4, 5);
+		addressesPage.changeAddress(value1,value2);
 		addressesPage.saveButtonClick();
 		
-		Assert.assertEquals(addressesPage.getAddressForCompare().getText(),temp);
+		Assert.assertNotEquals(addressesPage.getAddressForCompare().getText(), temp);
 	}	
 	@Test (priority = 3)
-	public void remuveAddress() throws InterruptedException {
+	public void remuveAddress() {
+		boolean check = addressesPage.isElementPresent();
 		addressesPage.deleteButtonClick();
-		Thread.sleep(2000);
 		addressesPage.alertClickOK();
-		Thread.sleep(2000);
+		
+		Assert.assertFalse(check);
 	}
 	@AfterMethod
-	public void theEndTest() throws InterruptedException {
+	public void theEndTest() {
 		driver.manage().deleteAllCookies();
 		driver.navigate().refresh();
-		Thread.sleep(2000);
 	}
 }

@@ -15,47 +15,40 @@ public class AddingProductsTest extends TestBase {
 	public void addOneProduct() {
 		addingProductsPage.addProduct(addingProductsPage.getProduct1(),addingProductsPage.getAddToCart1());
 		addingProductsPage.proceedToCheckoutClick();
-		addingProductsPage.js.executeScript("window.scrollBy(0,150)");
-		Assert.assertTrue(addingProductsPage.getIdAssert1().isDisplayed());
+		Assert.assertEquals(addingProductsPage.testForAssert(), excelreader.getData("AddingProducts", 4, 4));
 	}
 	@Test (priority = 1)
 	public void addProductQuantity() throws InterruptedException {
 		addingProductsPage.addProduct(addingProductsPage.getProduct1(),addingProductsPage.getAddToCart1());
 		addingProductsPage.proceedToCheckoutClick();
-		addingProductsPage.js.executeScript("window.scrollBy(0,150)");
 		addingProductsPage.quantityAddClick();
 		addingProductsPage.quantityAddClick();
-		Thread.sleep(4000);
-		Assert.assertEquals(addingProductsPage.getTextAssert2().getText(), excelreader.getData("AddingProducts", 7, 4));
+		Thread.sleep(3000);
+		Assert.assertEquals(addingProductsPage.testForAssert(), excelreader.getData("AddingProducts", 6, 4));
 	}
 	@Test (priority = 2)
 	public void addThreeProducts() throws InterruptedException {		
 		addingProductsPage.addProduct(addingProductsPage.getProduct1(),addingProductsPage.getAddToCart1());
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		addingProductsPage.continueShoppingClick();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		addingProductsPage.addProduct(addingProductsPage.getProduct2(),addingProductsPage.getAddToCart2());
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		addingProductsPage.continueShoppingClick();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		addingProductsPage.addProduct(addingProductsPage.getProduct3(),addingProductsPage.getAddToCart3());
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		addingProductsPage.proceedToCheckoutClick();
-		Thread.sleep(2000);
-		addingProductsPage.js.executeScript("window.scrollBy(0,300)");
-		Assert.assertTrue(addingProductsPage.getIdAssert1().isDisplayed());
-		Assert.assertTrue(addingProductsPage.getIdAssert2().isDisplayed());
-		Assert.assertTrue(addingProductsPage.getIdAssert3().isDisplayed());
+		Thread.sleep(1000);
+		Assert.assertEquals(addingProductsPage.testForAssert(), excelreader.getData("AddingProducts", 14, 4));
 	}
 	@Test (priority = 3)
 	public void removeProduct() throws InterruptedException {
-		addOneProduct();
+		addingProductsPage.addProduct(addingProductsPage.getProduct1(),addingProductsPage.getAddToCart1());
 		addingProductsPage.proceedToCheckoutClick();
-		addingProductsPage.js.executeScript("window.scrollBy(0,150)");
-		Thread.sleep(2000);
 		addingProductsPage.deleteClick();
 		Thread.sleep(2000);
-		Assert.assertEquals(addingProductsPage.getTextAssert().getText(), excelreader.getData("AddingProducts", 17, 4));
+		Assert.assertEquals(addingProductsPage.testForAssert(), excelreader.getData("AddingProducts", 17, 4));
 	}
 	@AfterMethod
 	public void theEndTest() throws InterruptedException {
